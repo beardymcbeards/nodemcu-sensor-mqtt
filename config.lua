@@ -1,15 +1,15 @@
--- let's define the pins
 -- Map the GPIO pin number to a MQTT topic
 map = {}
-map[1] = "Front Door"
-map[2] = "Back Door"
-map[5] = "Garage Entry"
+map[1] = "zone1"
+map[2] = "zone2"
+map[5] = "zone3"
+map[6] = "zone4"
+map[7] = "zone5"
 
 -- MQTT config
-topic_prefix = "pat/alarm/"
-status_topic = "status"
+topic_prefix = "house/sensors/"
 
--- Map MQTT payloads
+-- Map MQTT value payloads
 payload = {}
 payload[0] = "closed"
 payload[1] = "open"

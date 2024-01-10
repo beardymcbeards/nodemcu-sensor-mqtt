@@ -12,19 +12,19 @@ function startup()
 end
 
 --init.lua
-print("Setting up wifi")
+print("Connecting to: "..WIFI_CONFIG.ssid)
 wifi.setmode(wifi.STATION)
 wifi.sta.config(WIFI_CONFIG)
+wifi.sta.sethostname(HOSTNAME)
 wifi.sta.connect()
-wifi.sta.autoconnect(1)
 tmr.alarm(1, 1000, 1, function()
-    if wifi.sta.getip()== nil then
-      print("Waiting on dhcp...")
-    else
-      tmr.stop(1)
-      print("Config done, IP is "..wifi.sta.getip())
-      print("You have 5 seconds to abort startup")
-      print("Waiting...")
-      tmr.alarm(0, 5000, 0, startup)
-    end
- end)
+  if wifi.sta.getip()== nil then
+    print("Waiting on dhcp...")
+  else
+    tmr.stop(1)
+    print("Wifi connected. IP:"..wifi.sta.getip())
+    print("You have 2 seconds to abort startup")
+    print("Waiting...")
+    tmr.alarm(0, 2000, 0, startup)
+  end
+end)
